@@ -259,7 +259,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 259547967}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -82.957214, y: -248.8468, z: 271.8741}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 534669905}
@@ -392,14 +392,6 @@ MonoBehaviour:
     bottomFaceTexture: 0
     leftFaceTexture: 0
     rightFaceTexture: 0
-  - blockName: Bedrock
-    isSolid: 1
-    backFaceTexture: 9
-    frontFaceTexture: 9
-    topFaceTexture: 9
-    bottomFaceTexture: 9
-    leftFaceTexture: 9
-    rightFaceTexture: 9
   - blockName: Stone
     isSolid: 1
     backFaceTexture: 0
@@ -408,14 +400,6 @@ MonoBehaviour:
     bottomFaceTexture: 0
     leftFaceTexture: 0
     rightFaceTexture: 0
-  - blockName: Grass
-    isSolid: 1
-    backFaceTexture: 2
-    frontFaceTexture: 2
-    topFaceTexture: 7
-    bottomFaceTexture: 1
-    leftFaceTexture: 2
-    rightFaceTexture: 2
   - blockName: Dirt
     isSolid: 1
     backFaceTexture: 1
@@ -424,14 +408,30 @@ MonoBehaviour:
     bottomFaceTexture: 1
     leftFaceTexture: 1
     rightFaceTexture: 1
+  - blockName: Grass
+    isSolid: 1
+    backFaceTexture: 2
+    frontFaceTexture: 2
+    topFaceTexture: 3
+    bottomFaceTexture: 1
+    leftFaceTexture: 2
+    rightFaceTexture: 2
+  - blockName: Cobble
+    isSolid: 1
+    backFaceTexture: 4
+    frontFaceTexture: 4
+    topFaceTexture: 4
+    bottomFaceTexture: 4
+    leftFaceTexture: 4
+    rightFaceTexture: 4
   - blockName: Sand
     isSolid: 1
-    backFaceTexture: 10
-    frontFaceTexture: 10
-    topFaceTexture: 10
-    bottomFaceTexture: 10
-    leftFaceTexture: 10
-    rightFaceTexture: 10
+    backFaceTexture: 5
+    frontFaceTexture: 5
+    topFaceTexture: 5
+    bottomFaceTexture: 5
+    leftFaceTexture: 5
+    rightFaceTexture: 5
 --- !u!4 &1740372809
 Transform:
   m_ObjectHideFlags: 0
