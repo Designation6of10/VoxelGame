@@ -124,20 +124,20 @@ public class Chunk {
 
     public void EditVoxel (Vector3 pos, byte newID) {
 
-        ChunkCoord chunkCoord = world.GetChunkCoordFromVector3(pos);
+        int xCheck = Mathf.FloorToInt(pos.x);
+        int yCheck = Mathf.FloorToInt(pos.y);
+        int zCheck = Mathf.FloorToInt(pos.z);
 
-        int xCheck = Mathf.Abs(Mathf.FloorToInt(pos.x));
-        int yCheck = Mathf.Abs(Mathf.FloorToInt(pos.y));
-        int zCheck = Mathf.Abs(Mathf.FloorToInt(pos.z));
+        xCheck -= (Mathf.FloorToInt(chunkObject.transform.position.x));
+        yCheck -= (Mathf.FloorToInt(chunkObject.transform.position.y));
+        zCheck -= (Mathf.FloorToInt(chunkObject.transform.position.z));
 
-
-        xCheck -= (Mathf.Abs(chunkCoord.x) * VoxelData.ChunkWidth);
-        yCheck -= (Mathf.Abs(chunkCoord.y) * VoxelData.ChunkHeight);
-        zCheck -= (Mathf.Abs(chunkCoord.z) * VoxelData.ChunkWidth);
-
-        xCheck = Mathf.Abs(xCheck);
-        yCheck = Mathf.Abs(yCheck);
-        zCheck = Mathf.Abs(zCheck);
+        if (xCheck < 0)
+            xCheck += VoxelData.ChunkWidth;
+        if (yCheck < 0)
+            yCheck += VoxelData.ChunkHeight;
+        if (zCheck < 0)
+            zCheck += VoxelData.ChunkWidth;
 
 
         voxelMap[xCheck, yCheck, zCheck] = newID;
@@ -181,20 +181,26 @@ public class Chunk {
 
     public byte GetVoxelFromGlobalVector3 (Vector3 pos) {
 
-        ChunkCoord chunkCoord = world.GetChunkCoordFromVector3(pos);
+        int xCheck = Mathf.FloorToInt(pos.x);
+        int yCheck = Mathf.FloorToInt(pos.y);
+        int zCheck = Mathf.FloorToInt(pos.z);
 
-        int xCheck = Mathf.Abs(Mathf.FloorToInt(pos.x));
-        int yCheck = Mathf.Abs(Mathf.FloorToInt(pos.y));
-        int zCheck = Mathf.Abs(Mathf.FloorToInt(pos.z));
+        Debug.Log("checks before math " + xCheck + " " + yCheck + " " + zCheck);
+        Debug.Log("chunk transform position " + chunkObject.transform.position.x + " " + chunkObject.transform.position.y + " " + chunkObject.transform.position.z);
+
+        xCheck -= (Mathf.FloorToInt(chunkObject.transform.position.x));
+        yCheck -= (Mathf.FloorToInt(chunkObject.transform.position.y));
+        zCheck -= (Mathf.FloorToInt(chunkObject.transform.position.z));
+
+        if (xCheck < 0)
+            xCheck += VoxelData.ChunkWidth;
+        if (yCheck < 0)
+            yCheck += VoxelData.ChunkHeight;
+        if (zCheck < 0)
+            zCheck += VoxelData.ChunkWidth;
 
 
-        xCheck -= (Mathf.Abs(chunkCoord.x) * VoxelData.ChunkWidth);
-        yCheck -= (Mathf.Abs(chunkCoord.y) * VoxelData.ChunkHeight);
-        zCheck -= (Mathf.Abs(chunkCoord.z) * VoxelData.ChunkWidth);
-
-        xCheck = Mathf.Abs(xCheck);
-        yCheck = Mathf.Abs(yCheck);
-        zCheck = Mathf.Abs(zCheck);
+        Debug.Log("checks after math " + xCheck + " " + yCheck + " " + zCheck);
 
 
         return voxelMap[xCheck, yCheck, zCheck];
@@ -282,9 +288,28 @@ public class ChunkCoord {
 
     public ChunkCoord (Vector3 pos) {
 
-        int xCheck = Mathf.FloorToInt(pos.x);
-        int yCheck = Mathf.FloorToInt(pos.y);
-        int zCheck = Mathf.FloorToInt(pos.z);
+        /*ChunkCoord chunkCoord = GetChunkCoordFromVector3(pos);
+
+        int xCheck = Mathf.Abs(Mathf.FloorToInt(pos.x));
+        int yCheck = Mathf.Abs(Mathf.FloorToInt(pos.y));
+        int zCheck = Mathf.Abs(Mathf.FloorToInt(pos.z));
+
+
+        xCheck -= (Mathf.Abs(chunkCoord.x) * VoxelData.ChunkWidth);
+        yCheck -= (Mathf.Abs(chunkCoord.y) * VoxelData.ChunkHeight);
+        zCheck -= (Mathf.Abs(chunkCoord.z) * VoxelData.ChunkWidth);
+
+        xCheck = Mathf.Abs(xCheck);
+        yCheck = Mathf.Abs(yCheck);
+        zCheck = Mathf.Abs(zCheck);
+
+        x = xCheck;
+        y = yCheck;
+        z = zCheck;*/
+
+        int xCheck = (Mathf.Abs(Mathf.FloorToInt(pos.x)));
+        int yCheck = (Mathf.Abs(Mathf.FloorToInt(pos.y)));
+        int zCheck = (Mathf.Abs(Mathf.FloorToInt(pos.z)));
 
         x = xCheck / VoxelData.ChunkWidth;
         y = yCheck / VoxelData.ChunkHeight;
@@ -302,5 +327,14 @@ public class ChunkCoord {
             return false;
 
     }
+
+    /*private ChunkCoord GetChunkCoordFromVector3(Vector3 pos) {
+
+        int x = Mathf.FloorToInt(pos.x / VoxelData.ChunkWidth);
+        int y = Mathf.FloorToInt(pos.y / VoxelData.ChunkHeight);
+        int z = Mathf.FloorToInt(pos.z / VoxelData.ChunkWidth);
+        return new ChunkCoord(x, y, z);
+
+    }*/
 
 }
