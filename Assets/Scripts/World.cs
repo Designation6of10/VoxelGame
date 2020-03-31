@@ -16,18 +16,20 @@ public class World : MonoBehaviour {
     Dictionary<Vector3, Chunk> chunks = new Dictionary<Vector3, Chunk>();
 
     List<ChunkCoord> activeChunks = new List<ChunkCoord>();
-    ChunkCoord playerChunkCoord;
+    public ChunkCoord playerChunkCoord;
     ChunkCoord playerLastChunkCoord;
 
     List<ChunkCoord> chunksToCreate = new List<ChunkCoord>();
     private bool isCreatingChunks;
     private bool isGeneratingWorld;
 
+    public GameObject debugScreen;
+
     private void Start() {
 
         Random.InitState(seed);
 
-        spawnPosition = new Vector3(30, 100, 30);
+        spawnPosition = new Vector3(30, 200, 30);
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
         
@@ -46,6 +48,9 @@ public class World : MonoBehaviour {
             //if chunks need creating, and the coroutine isn't currently running, start creating chunks
             if (chunksToCreate.Count > 0 && !isCreatingChunks)
                 StartCoroutine("CreateChunks");
+
+            if (Input.GetKeyDown(KeyCode.F3))
+                debugScreen.SetActive(!debugScreen.activeSelf);
         }
 
     }
@@ -95,6 +100,15 @@ public class World : MonoBehaviour {
         int y = Mathf.FloorToInt(pos.y / VoxelData.ChunkHeight);
         int z = Mathf.FloorToInt(pos.z / VoxelData.ChunkWidth);
         return new ChunkCoord(x, y, z);
+
+    }
+
+    public Chunk GetChunkFromVector3 (Vector3 pos) {
+
+        int x = Mathf.FloorToInt(pos.x / VoxelData.ChunkWidth);
+        int y = Mathf.FloorToInt(pos.y / VoxelData.ChunkHeight);
+        int z = Mathf.FloorToInt(pos.z / VoxelData.ChunkWidth);
+        return chunks[new Vector3(x,y,z)];
 
     }
 
