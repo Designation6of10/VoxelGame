@@ -29,7 +29,7 @@ public class World : MonoBehaviour {
 
         Random.InitState(seed);
 
-        spawnPosition = new Vector3(30, 200, 30);
+        spawnPosition = new Vector3(30, 100, 30);
         GenerateWorld();
         playerLastChunkCoord = GetChunkCoordFromVector3(player.position);
         

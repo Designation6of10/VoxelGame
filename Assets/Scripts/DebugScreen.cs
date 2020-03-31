@@ -27,12 +27,15 @@ public class DebugScreen : MonoBehaviour
         debugText += "\n";
         debugText += frameRate + " fps";
         debugText += "\n\n";
-        debugText += "XYZ: " + world.player.transform.position.x + " / " + world.player.transform.position.y + " / " + world.player.transform.position.z;
+        debugText += "XYZ: " + string.Format("{0:0.000}", world.player.transform.position.x) + " / " + string.Format("{0:0.000}", world.player.transform.position.y) + " / " + string.Format("{0:0.000}", world.player.transform.position.z);
         debugText += "\n";
-        debugText += "Chunk " + world.playerChunkCoord.x + " / " + world.playerChunkCoord.y + " / " + world.playerChunkCoord.z;
+        debugText += "Chunk: " + world.playerChunkCoord.x + " / " + world.playerChunkCoord.y + " / " + world.playerChunkCoord.z;
         debugText += "\n";
-        debugText += "Looking at block " + Mathf.FloorToInt(highlight.position.x) + " / " + Mathf.FloorToInt(highlight.position.y) + " / " + Mathf.FloorToInt(highlight.position.z);
-
+        debugText += "Looking at block: ";
+        if (highlight.gameObject.activeSelf)
+            debugText += Mathf.FloorToInt(highlight.position.x) + " / " + Mathf.FloorToInt(highlight.position.y) + " / " + Mathf.FloorToInt(highlight.position.z);
+        else
+            debugText += "None";
 
         text.text = debugText;
 

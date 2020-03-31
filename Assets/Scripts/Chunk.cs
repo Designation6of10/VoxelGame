@@ -124,22 +124,21 @@ public class Chunk {
 
     public void EditVoxel (Vector3 pos, byte newID) {
 
-        int xCheck = Mathf.FloorToInt(pos.x);
-        int yCheck = Mathf.FloorToInt(pos.y);
-        int zCheck = Mathf.FloorToInt(pos.z);
+        ChunkCoord chunkCoord = world.GetChunkCoordFromVector3(pos);
+
+        int xCheck = Mathf.Abs(Mathf.FloorToInt(pos.x));
+        int yCheck = Mathf.Abs(Mathf.FloorToInt(pos.y));
+        int zCheck = Mathf.Abs(Mathf.FloorToInt(pos.z));
 
 
-        xCheck -= Mathf.FloorToInt(chunkObject.transform.position.x);
-        yCheck -= Mathf.FloorToInt(chunkObject.transform.position.y);
-        zCheck -= Mathf.FloorToInt(chunkObject.transform.position.z);
+        xCheck -= (Mathf.Abs(chunkCoord.x) * VoxelData.ChunkWidth);
+        yCheck -= (Mathf.Abs(chunkCoord.y) * VoxelData.ChunkHeight);
+        zCheck -= (Mathf.Abs(chunkCoord.z) * VoxelData.ChunkWidth);
 
+        xCheck = Mathf.Abs(xCheck);
+        yCheck = Mathf.Abs(yCheck);
+        zCheck = Mathf.Abs(zCheck);
 
-        if (xCheck < 0)
-            xCheck += VoxelData.ChunkWidth;
-        if (yCheck < 0)
-            yCheck += VoxelData.ChunkHeight;
-        if (zCheck < 0)
-            zCheck += VoxelData.ChunkWidth;
 
         voxelMap[xCheck, yCheck, zCheck] = newID;
 
@@ -182,22 +181,21 @@ public class Chunk {
 
     public byte GetVoxelFromGlobalVector3 (Vector3 pos) {
 
-        int xCheck = Mathf.FloorToInt(pos.x);
-        int yCheck = Mathf.FloorToInt(pos.y);
-        int zCheck = Mathf.FloorToInt(pos.z);
+        ChunkCoord chunkCoord = world.GetChunkCoordFromVector3(pos);
+
+        int xCheck = Mathf.Abs(Mathf.FloorToInt(pos.x));
+        int yCheck = Mathf.Abs(Mathf.FloorToInt(pos.y));
+        int zCheck = Mathf.Abs(Mathf.FloorToInt(pos.z));
 
 
-        xCheck -= Mathf.FloorToInt(chunkObject.transform.position.x);
-        yCheck -= Mathf.FloorToInt(chunkObject.transform.position.y);
-        zCheck -= Mathf.FloorToInt(chunkObject.transform.position.z);
+        xCheck -= (Mathf.Abs(chunkCoord.x) * VoxelData.ChunkWidth);
+        yCheck -= (Mathf.Abs(chunkCoord.y) * VoxelData.ChunkHeight);
+        zCheck -= (Mathf.Abs(chunkCoord.z) * VoxelData.ChunkWidth);
 
+        xCheck = Mathf.Abs(xCheck);
+        yCheck = Mathf.Abs(yCheck);
+        zCheck = Mathf.Abs(zCheck);
 
-        if (xCheck < 0)
-            xCheck += VoxelData.ChunkWidth;
-        if (yCheck < 0)
-            yCheck += VoxelData.ChunkHeight;
-        if (zCheck < 0)
-            zCheck += VoxelData.ChunkWidth;
 
         return voxelMap[xCheck, yCheck, zCheck];
 
