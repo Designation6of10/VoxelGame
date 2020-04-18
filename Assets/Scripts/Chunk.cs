@@ -133,11 +133,11 @@ public class Chunk {
         zCheck -= (Mathf.FloorToInt(chunkObject.transform.position.z));
 
         if (xCheck < 0)
-            xCheck += VoxelData.ChunkWidth;
+            xCheck = (VoxelData.ChunkWidth - Mathf.Abs(xCheck));
         if (yCheck < 0)
-            yCheck += VoxelData.ChunkHeight;
+            yCheck = (VoxelData.ChunkHeight - Mathf.Abs(yCheck));
         if (zCheck < 0)
-            zCheck += VoxelData.ChunkWidth;
+            zCheck = (VoxelData.ChunkWidth - Mathf.Abs(zCheck));
 
 
         voxelMap[xCheck, yCheck, zCheck] = newID;
@@ -185,19 +185,21 @@ public class Chunk {
         int yCheck = Mathf.FloorToInt(pos.y);
         int zCheck = Mathf.FloorToInt(pos.z);
 
-        //Debug.Log("checks before math " + xCheck + " " + yCheck + " " + zCheck);
-        //Debug.Log("chunk transform position " + chunkObject.transform.position.x + " " + chunkObject.transform.position.y + " " + chunkObject.transform.position.z);
+        /*if (xCheck < 0) {
+            Debug.Log("checks before math " + xCheck + " " + yCheck + " " + zCheck);
+            Debug.Log("chunk transform position " + chunkObject.transform.position.x + " " + chunkObject.transform.position.y + " " + chunkObject.transform.position.z);
+        }*/
 
         xCheck -= (Mathf.FloorToInt(chunkObject.transform.position.x));
         yCheck -= (Mathf.FloorToInt(chunkObject.transform.position.y));
         zCheck -= (Mathf.FloorToInt(chunkObject.transform.position.z));
 
         if (xCheck < 0)
-            xCheck += VoxelData.ChunkWidth;
+            xCheck = (VoxelData.ChunkWidth - Mathf.Abs(xCheck));
         if (yCheck < 0)
-            yCheck += VoxelData.ChunkHeight;
+            yCheck = (VoxelData.ChunkHeight - Mathf.Abs(yCheck));
         if (zCheck < 0)
-            zCheck += VoxelData.ChunkWidth;
+            zCheck = (VoxelData.ChunkWidth - Mathf.Abs(zCheck));
 
 
         //Debug.Log("checks after math " + xCheck + " " + yCheck + " " + zCheck);
